@@ -11,6 +11,13 @@ def calc_ignore(wind):  # Converts single wind point to ACE regardless of streng
     wind = float(wind)
     return float((wind * wind)/10000)
 
+def hdp(wind):          # Converts single wind point to HDP
+    if (wind <= 64):
+        return 0
+    else:
+        wind = float(wind)
+        return float((wind * wind)/10000)
+
 def cumACE(winds):     # Parses winds and returns total ACE
     total = 0.0
     for wind in winds:
@@ -23,6 +30,12 @@ def cumACE_ignore(winds):   # Returns total ACE in winds regardless of strength
         total += calc_ignore(wind)
     return total
 
+def cumHDP(winds):   # Returns total HDP
+    total = 0.0
+    for wind in winds:
+        total += hdp(wind)
+    return total
+    
 def climo_at(ace):    # Categorizes season according to Atlantic climatology
     if (ace > 111):
         return "Above normal"
